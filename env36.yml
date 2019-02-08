@@ -1,0 +1,29 @@
+name: py36
+channels:
+    - anaconda
+    - conda-forge
+dependencies:
+  - python=3.6
+  - numpy
+  - scipy
+  - matplotlib
+  - pytest
+  - mpi4py
+  - shapely
+  - future
+  - h5py
+  - holoviews
+  - tqdm
+  - dask
+  - dask-jobqueue  
+  - sphinx
+  - jupyter
+  - kwant
+  - mkl
+  - mkl-service
+  - pip
+  - jupyter_contrib_nbextensions
+  - deepdish
+  - joblib
+  - pip:
+    - numpy-stl
