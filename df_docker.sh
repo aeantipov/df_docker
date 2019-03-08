@@ -40,5 +40,5 @@ docker run \
    	    -e PYTHONPATH \
         --name df_dev \
         -p 8888:8888 -it \
-        df:latest bash -c "${login_commands}" 
+        df_docker:latest bash -c "${login_commands}" 
 #docker rm df_dev

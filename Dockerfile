@@ -43,6 +43,15 @@ RUN curl -sSL https://apt.repos.intel.com/intel-gpg-keys/GPG-PUB-KEY-INTEL-SW-PR
     apt-get -qq -y update && \
     apt-get install -qq -y intel-mkl-64bit-2019.1 
 
+# Replace BLAS/LAPACiK - https://github.com/eddelbuettel/mkl4deb
+RUN update-alternatives --install /usr/lib/x86_64-linux-gnu/libblas.so     libblas.so-x86_64-linux-gnu      /opt/intel/mkl/lib/intel64/libmkl_rt.so 50 && \
+    update-alternatives --install /usr/lib/x86_64-linux-gnu/libblas.so.3   libblas.so.3-x86_64-linux-gnu    /opt/intel/mkl/lib/intel64/libmkl_rt.so 50 && \
+    update-alternatives --install /usr/lib/x86_64-linux-gnu/liblapack.so   liblapack.so-x86_64-linux-gnu    /opt/intel/mkl/lib/intel64/libmkl_rt.so 50 && \
+    update-alternatives --install /usr/lib/x86_64-linux-gnu/liblapack.so.3 liblapack.so.3-x86_64-linux-gnu  /opt/intel/mkl/lib/intel64/libmkl_rt.so 50 && \
+    echo "/opt/intel/lib/intel64"     >  /etc/ld.so.conf.d/mkl.conf && \
+    echo "/opt/intel/mkl/lib/intel64" >> /etc/ld.so.conf.d/mkl.conf && \
+    ldconfig && \
+    echo "MKL_THREADING_LAYER=GNU" >> /etc/environment
 
 # Set the working directory to /app
 WORKDIR /app
